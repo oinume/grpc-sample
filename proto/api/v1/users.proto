@@ -1,0 +1,65 @@
+// https://github.com/grpc-ecosystem/grpc-gateway/blob/master/third_party/googleapis/google/api/http.proto
+syntax = "proto3";
+
+package api.v1;
+
+import "google/api/annotations.proto";
+
+// https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto
+service Users {
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = {
+            get: "/v1/users/{id}"
+        };
+    }
+
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/users"
+        };
+    }
+
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            put: "/v1/users/{id}"
+            body: ""
+        };
+    }
+
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+        option (google.api.http) = {
+            delete: "/v1/users/{id}"
+        };
+    }
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message GetUserResponse {
+    string id = 1;
+    string name = 2;
+}
+
+message CreateUserRequest {
+    string name = 1;
+}
+
+message CreateUserResponse {
+    string id = 1;
+    string name = 2;
+}
+
+message UpdateUserRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message UpdateUserResponse {}
+
+message DeleteUserRequest {
+    string id = 1;
+}
+
+message DeleteUserResponse {}
