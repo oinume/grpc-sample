@@ -16,13 +16,14 @@ service Users {
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
         option (google.api.http) = {
             post: "/v1/users"
+            body: "*"
         };
     }
 
     rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
         option (google.api.http) = {
             put: "/v1/users/{id}"
-            body: ""
+            body: "*"
         };
     }
 
