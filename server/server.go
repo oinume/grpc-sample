@@ -1,13 +1,18 @@
 package server
 
 import (
-	_ "fmt"
 	"context"
 
 	"github.com/oinume/grpc-sample/proto-gen/go/proto/api/v1"
 )
 
 type UsersServer struct {}
+
+func (s *UsersServer) ListUsers(ctx context.Context, in *api_v1.ListUsersRequest) (*api_v1.ListUsersResponse, error) {
+	return &api_v1.ListUsersResponse{
+		Users: []*api_v1.User{},
+	}, nil
+}
 
 func (s *UsersServer) GetUser(ctx context.Context, in *api_v1.GetUserRequest) (*api_v1.User, error) {
 	return &api_v1.User{
@@ -31,10 +36,4 @@ func (s *UsersServer) UpdateUser(ctx context.Context, in *api_v1.UpdateUserReque
 
 func (s *UsersServer) DeleteUser(ctx context.Context, in *api_v1.DeleteUserRequest) (*api_v1.DeleteUserResponse, error) {
 	return &api_v1.DeleteUserResponse{}, nil
-}
-
-func (s *UsersServer) ListUsers(ctx context.Context, in *api_v1.ListUsersRequest) (*api_v1.ListUsersResponse, error) {
-	return &api_v1.ListUsersResponse{
-		Users: []*api_v1.User{},
-	}, nil
 }
