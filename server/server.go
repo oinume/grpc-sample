@@ -20,6 +20,7 @@ func (s *UsersServer) CreateUser(ctx context.Context, in *api_v1.CreateUserReque
 	return &api_v1.CreateUserResponse{
 		Id: "12345",
 		Name: in.GetName(),
+		RealName: in.GetRealName(),
 	}, nil
 }
 

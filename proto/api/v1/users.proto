@@ -45,11 +45,13 @@ message GetUserResponse {
 
 message CreateUserRequest {
     string name = 1;
+    string real_name = 2;
 }
 
 message CreateUserResponse {
     string id = 1;
     string name = 2;
+    string real_name = 3;
 }
 
 message UpdateUserRequest {
