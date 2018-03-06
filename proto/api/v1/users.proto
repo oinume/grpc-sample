@@ -7,13 +7,19 @@ import "google/api/annotations.proto";
 
 // https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto
 service Users {
-    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+        option (google.api.http) = {
+            get: "/v1/users"
+        };
+    }
+
+    rpc GetUser(GetUserRequest) returns (User) {
         option (google.api.http) = {
             get: "/v1/users/{id}"
         };
     }
 
-    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    rpc CreateUser(CreateUserRequest) returns (User) {
         option (google.api.http) = {
             post: "/v1/users"
             body: "*"
@@ -34,24 +40,19 @@ service Users {
     }
 }
 
-message GetUserRequest {
-    string id = 1;
+message ListUsersRequest {}
+
+message ListUsersResponse {
+    repeated User users = 1;
 }
 
-message GetUserResponse {
+message GetUserRequest {
     string id = 1;
-    string name = 2;
 }
 
 message CreateUserRequest {
     string name = 1;
     string real_name = 2;
-}
-
-message CreateUserResponse {
-    string id = 1;
-    string name = 2;
-    string real_name = 3;
 }
 
 message UpdateUserRequest {
@@ -66,3 +67,9 @@ message DeleteUserRequest {
 }
 
 message DeleteUserResponse {}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string real_name = 3;
+}
