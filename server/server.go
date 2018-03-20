@@ -10,14 +10,18 @@ type UsersServer struct {}
 
 func (s *UsersServer) ListUsers(ctx context.Context, in *api_v1.ListUsersRequest) (*api_v1.ListUsersResponse, error) {
 	return &api_v1.ListUsersResponse{
-		Users: []*api_v1.User{},
+		Users: []*api_v1.User{
+			{Id: "1", Name:"oinume", RealName: "kazuhiro oinuma"},
+			{Id: "2", Name:"akuwano", RealName: "Akihiro Kuwano"},
+			{Id: "3", Name:"oranie", RealName: "Takashi Narita"},
+		},
 	}, nil
 }
 
 func (s *UsersServer) GetUser(ctx context.Context, in *api_v1.GetUserRequest) (*api_v1.User, error) {
 	return &api_v1.User{
 		Id: in.GetId(),
-		Name: "hello",
+		Name: "oinume",
 		RealName: "Kazuhiro Oinuma",
 	}, nil
 }
