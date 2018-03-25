@@ -1,4 +1,4 @@
-APP = grc-sample
+APP = grpc-sample
 VENDOR_DIR = vendor
 PROTO_GEN_DIR = proto-gen
 GRPC_GATEWAY_REPO = github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis
