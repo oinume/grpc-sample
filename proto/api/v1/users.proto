@@ -4,6 +4,7 @@ syntax = "proto3";
 package api.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 // https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto
 service Users {
@@ -33,7 +34,7 @@ service Users {
         };
     }
 
-    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v1/users/{id}"
         };

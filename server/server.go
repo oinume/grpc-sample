@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/oinume/grpc-sample/proto-gen/go/proto/api/v1"
+	protobuf_empty "github.com/golang/protobuf/ptypes/empty"
 )
 
 type UsersServer struct {}
@@ -38,6 +39,6 @@ func (s *UsersServer) UpdateUser(ctx context.Context, in *api_v1.UpdateUserReque
 	return &api_v1.UpdateUserResponse{}, nil
 }
 
-func (s *UsersServer) DeleteUser(ctx context.Context, in *api_v1.DeleteUserRequest) (*api_v1.DeleteUserResponse, error) {
-	return &api_v1.DeleteUserResponse{}, nil
+func (s *UsersServer) DeleteUser(ctx context.Context, in *api_v1.DeleteUserRequest) (*protobuf_empty.Empty, error) {
+	return &protobuf_empty.Empty{}, nil
 }
