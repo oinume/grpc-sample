@@ -22,7 +22,7 @@ $ go run ./cmd/main.go
 ### Create a new user
  
 ```
-$ curl -v -X POST -d '{"name": "oinume", "real_name": "kazuhiro oinuma"}' http://localhost:5000/v1/users | jq .
+$ curl -X POST -d '{"name": "oinume", "real_name": "kazuhiro oinuma"}' http://localhost:5000/v1/users | jq .
 
 {
   "id": "12345",
@@ -34,7 +34,7 @@ $ curl -v -X POST -d '{"name": "oinume", "real_name": "kazuhiro oinuma"}' http:/
 ### Get a user
 
 ```
-$ curl -v -X GET http://localhost:5000/v1/users/1 | jq .
+$ curl -X GET http://localhost:5000/v1/users/1 | jq .
 
 {
   "id": "1",
@@ -46,7 +46,7 @@ $ curl -v -X GET http://localhost:5000/v1/users/1 | jq .
 ### List users
 
 ```
-$ curl -v -X GET http://localhost:5000/v1/users | jq .
+$ curl -X GET http://localhost:5000/v1/users | jq .
 
 {
   "users": [
@@ -67,4 +67,12 @@ $ curl -v -X GET http://localhost:5000/v1/users | jq .
     }
   ]
 }
+```
+
+### Delete a user
+
+```
+curl -X DELETE http://localhost:5000/v1/users/12345 | jq .
+
+{}
 ```
