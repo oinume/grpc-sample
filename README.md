@@ -2,7 +2,6 @@
 
 ## Installation
 ```
-$ make install-commands
 $ make setup
 ```
 
