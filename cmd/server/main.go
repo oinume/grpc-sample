@@ -8,10 +8,10 @@ import (
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"github.com/oinume/grpc-sample/proto-gen/go/proto/api/v1"
 	"github.com/oinume/grpc-sample/server"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {

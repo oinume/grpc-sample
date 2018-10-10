@@ -5,7 +5,7 @@ GRPC_GATEWAY_REPO = github.com/grpc-ecosystem/grpc-gateway/third_party/googleapi
 GO_GET ?= go get
 VENDOR_DIR = vendor
 
-all: build
+all: client server
 
 .PHONY: setup
 setup: install-commands
@@ -15,13 +15,16 @@ install-commands:
 	$(GO_GET) github.com/golang/protobuf/protoc-gen-go
 	$(GO_GET) github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 
-.PHONY: build
-build:
-	go build -o bin/$(APP) github.com/oinume/grpc-sample/cmd
+.PHONY: client
+client:
+	go build -o bin/$(APP)-client github.com/oinume/grpc-sample/cmd/client
+
+.PHONY: server
+server:
+	go build -o bin/$(APP)-server github.com/oinume/grpc-sample/cmd/server
 
 clean:
 	${RM} bin/$(APP)
-
 
 .PHONY: proto/go
 proto/go:
