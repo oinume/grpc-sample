@@ -26,11 +26,13 @@ clean:
 .PHONY: proto/go
 proto/go:
 	rm -rf $(PROTO_GEN_DIR)/go && mkdir -p $(PROTO_GEN_DIR)/go
-	protoc -I/usr/local/include -I. \
+	protoc -I/usr/local/include -I. -I./proto \
   		-I$(GOPATH)/src \
   		-I$(VENDOR_DIR)/$(GRPC_GATEWAY_REPO) \
   		--go_out=plugins=grpc:$(PROTO_GEN_DIR)/go \
   		proto/api/v1/*.proto
-	protoc -I/usr/local/include -I. -I$(GOPATH)/src -I$(VENDOR_DIR)/$(GRPC_GATEWAY_REPO) \
+	protoc -I/usr/local/include -I. -I./proto \
+		-I$(GOPATH)/src \
+		-I$(VENDOR_DIR)/$(GRPC_GATEWAY_REPO) \
 		--grpc-gateway_out=logtostderr=true:$(PROTO_GEN_DIR)/go \
 		proto/api/v1/*.proto

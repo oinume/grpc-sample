@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    working_directory: /go/src/github.com/oinume/grpc-sample
+    docker:
+    - image: golang:1.11-stretch
+      environment:
+    steps:
+    - checkout
+    - run:
+        name: "Set .gitconfig"
+        command: |
+          echo "" > ~/.gitconfig
+          git config --global url."https://github.com".insteadOf git://github.com
+          git config --global http.https://gopkg.in.followRedirects true
+    - run:
+        name: "Build"
+        command: |
+          make build
+#    - run:
+#        name: "Run go-test"
+#        command: |
+#          go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
