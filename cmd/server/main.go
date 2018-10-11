@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -14,22 +15,25 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
+var (
+	httpPort = flag.Int("http-port", 5000, "HTTP server port. default is 5000")
+	grpcPort = flag.Int("grpc-port", 5001, "gRPC server port. default is 5001")
+)
+
 func main() {
-	//port := config.ListenPort()
-	//grpcPort := config.GRPCListenPort()
-	port := 5000
-	grpcPort := 5001
-	if port == grpcPort {
-		log.Fatalf("Can't specify same port for a server.")
+	flag.Parse()
+
+	if *httpPort == *grpcPort {
+		log.Fatalf("Can't specify same httpPort for a server.")
 	}
 
 	errors := make(chan error)
 	go func() {
-		errors <- startGRPCServer(grpcPort)
+		errors <- startGRPCServer(*grpcPort)
 	}()
 
 	go func() {
-		errors <- startHTTPServer(grpcPort, port)
+		errors <- startHTTPServer(*grpcPort, *httpPort)
 	}()
 
 	for err := range errors {
@@ -71,6 +75,6 @@ func startHTTPServer(grpcPort, httpPort int) error {
 	if err := api_v1.RegisterUsersHandlerFromEndpoint(ctx, gatewayMux, endpoint, opts); err != nil {
 		return err
 	}
-	fmt.Printf("Listening on %v\n", httpPort)
+	fmt.Printf("Starting HTTP server on %v\n", httpPort)
 	return http.ListenAndServe(fmt.Sprintf(":%d", httpPort), gatewayMux)
 }
