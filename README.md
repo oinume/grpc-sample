@@ -1,5 +1,10 @@
 # How to run
 
+## Requirements
+
+- Go 1.11 or later
+- protoc (protobuf)
+
 ## Installation
 ```
 $ make setup

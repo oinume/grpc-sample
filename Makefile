@@ -12,12 +12,12 @@ setup: install-commands
 
 .PHONY: install-commands
 install-commands:
-	GO11MODULE=off $(GO_GET) github.com/golang/protobuf/protoc-gen-go
-	GO11MODULE=off $(GO_GET) github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+	GO111MODULE=off $(GO_GET) github.com/golang/protobuf/protoc-gen-go
+	GO111MODULE=off $(GO_GET) github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 
 .PHONY: build
 build:
-	GO11MODULE=off go build -o bin/$(APP) github.com/oinume/grpc-sample/cmd
+	GO111MODULE=on go build -o bin/$(APP) github.com/oinume/grpc-sample/cmd
 
 clean:
 	${RM} bin/$(APP)
