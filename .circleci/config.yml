@@ -3,8 +3,9 @@ jobs:
   build:
     working_directory: /go/src/github.com/oinume/grpc-sample
     docker:
-    - image: golang:1.11-stretch
+    - image: golang:1.12-stretch
       environment:
+        - GO111MODULE: "on"
     steps:
     - checkout
     - run:
