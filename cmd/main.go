@@ -6,6 +6,8 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
+	"strconv"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	api_v1 "github.com/oinume/grpc-sample/proto-gen/go/proto/api/v1"
@@ -15,12 +17,16 @@ import (
 )
 
 func main() {
-	//port := config.ListenPort()
-	//grpcPort := config.GRPCListenPort()
-	port := 5000
-	grpcPort := 5001
+	port, err := getEnvInt("PORT", 5000)
+	if err != nil {
+		log.Fatalln("PORT must be integer value")
+	}
+	grpcPort, err := getEnvInt("GRPC_PORT", 5001)
+	if err != nil {
+		log.Fatalln("GRPC_PORT must be integer value")
+	}
 	if port == grpcPort {
-		log.Fatalf("Can't specify same port for a server.")
+		log.Fatalln("Can't specify same port for a server")
 	}
 
 	errors := make(chan error)
@@ -73,4 +79,16 @@ func startHTTPServer(grpcPort, httpPort int) error {
 	}
 	fmt.Printf("Listening on %v\n", httpPort)
 	return http.ListenAndServe(fmt.Sprintf(":%d", httpPort), gatewayMux)
+}
+
+func getEnvInt(key string, dvalue int) (int, error) {
+	if v := os.Getenv(key); v == "" {
+		return dvalue, nil
+	} else {
+		value, err := strconv.ParseInt(v, 10, 32)
+		if err != nil {
+			return 0, err
+		}
+		return int(value), nil
+	}
 }

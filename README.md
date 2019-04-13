@@ -22,6 +22,11 @@ $ make proto/go
 $ go run ./cmd/main.go
 ```
 
+You can specify listening port like this
+```
+$ PORT=5000 GRPC_PORT=5001 go run ./cmd/main.go
+```
+
 ## Call API with curl
 
 ### Create a new user
